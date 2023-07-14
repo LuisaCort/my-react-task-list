@@ -22,8 +22,7 @@ export const useTaskList = () => {
   const [tasks, setTasks] = useState([])
   useEffect(() => setTasks(getTask()), [])
   const addTask = input => {
-    let id = Math.max.apply(null, [0, tasks.map(element => element.id)])+1
-    // id = id === -Infinity ? 0 : id
+    let id = Math.max.apply(null, [0, ...tasks.map(element => element.id)])+1
     setTasks([...tasks, {
       desc: input,
       state: false,

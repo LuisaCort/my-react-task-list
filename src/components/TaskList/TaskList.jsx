@@ -22,6 +22,7 @@ const TaskList = () => {
     addTask(input)
     setInput("")
   }
+  console.log(tasks)
   return(
     <div id="TaskList">
       <form id="InputContainer" onSubmit={handleAdd}>
