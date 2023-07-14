@@ -1,18 +1,18 @@
 #Task{
-  width: fit-content;
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   align-items: center;
   column-gap: 20px;
   padding: 10px 20px;
   margin: 20px 0;
-  border-radius: 40px;
+  border-radius: 15px;
   background-color: lightgray;
   transition: all 0.3s;
 }
 
 #Task:hover{
   scale: 1.1;
-  height: auto;
 }
 
 #Task>input[type="checkbox"]{
@@ -31,7 +31,8 @@
   background-color: #6c63ff;
 }
 
-#Task>input[type="checkbox"]:checked+textarea {
+#Task>input[type="checkbox"]:checked+div input,
+#Task>input[type="checkbox"]:checked+div textarea{
   text-decoration: line-through;
 }
 
@@ -39,17 +40,48 @@
   background-color: #00cc00;
 }
 
+#Task:has(input[type="text"]:focus),
 #Task:has(textarea:focus){
   background-color: #f7ce5d;
   scale: 1.1;
-  height: auto;  
 }
 
-#Task>textarea{
-  width: 220px;
+#Task:has(h2){
+  background-color: red !important;
+}
+
+#text_fields{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+#text_fields>h2{
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+}
+
+#text_fields>input{
+  box-sizing: border-box;
+  width: 100%;
   overflow: hidden;
   transition: all 0.3s;
-  resize: vertical;
+  height: 30px;
+  text-align: center;
+}
+
+#text_fields>textarea{
+  box-sizing: border-box;
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 30px;
+  min-height: 30px;
+  height: 30px;
+}
+
+#text_fields>textarea:focus{
+  max-height: none;
 }
 
 #Task>button{
@@ -65,4 +97,5 @@
 
 #Task>button:hover{
   transform: scale(1.2);
+  background-color: red;
 }

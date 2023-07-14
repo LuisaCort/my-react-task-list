@@ -1,31 +1,53 @@
 import "./Task.css"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+import { useForm } from "react-hook-form"
 
 const Task = (props) => {
   const {id, onDelete, onEdit} = props
-  const [input, setInput] = useState(props.desc)
-  const [state, setState] = useState(props.state)
-  const [height, setHeight] = useState("30px")
-  const handleInput = item => setInput(item.target.value)
-  const handleState = item => setState(item.target.checked)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    trigger,
+    formState: { errors }
+  } = useForm(
+    {
+      defaultValues: {
+        state: props.state,
+        name: props.name,
+        desc: props.desc
+      }
+    }
+  )
+  const name = watch("name")
+  const desc = watch("desc")
+  const state = watch("state")
+  useEffect(() => {
+    (async () => {
+      await trigger()
+      Object.keys(errors).length === 0 && onEdit(id, name, desc, state)
+    })()
+  }, [name, desc, state])
   const handleDelete = () => onDelete(id)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => onEdit(id, input, state), [input, state])
-  const handleFullSize = event => setHeight(event.currentTarget.scrollHeight+"px")
-  const handleSmallSize = () => setHeight("30px")
   return(
-    <div id="Task">
-      <input type="checkbox" checked={state} onChange={handleState}/>
-      <textarea 
-        value={input} 
-        onChange={handleInput} 
-        disabled={state} 
-        style={{height:height}}
-        onFocus={handleFullSize} 
-        onBlur={handleSmallSize}
-      />
-      <button onClick={handleDelete}>🗑️</button>
-    </div>
+    <form id="Task" onSubmit={handleSubmit(handleDelete)}>
+      <input type="checkbox" {...register("state")}/>
+      <div id="text_fields">
+        {errors.name && <h2>{errors.name.message}</h2>}
+        <input type="text" {...register("name", {
+          disabled: state,
+          required: "Nombre requerido",
+          minLength: {
+            value: 3,
+            message: "Nombre mínimo 3 caracteres"
+          }
+        })}/>
+        <textarea type="text" {...register("desc", {
+          disabled: state
+        })}/>
+      </div>
+      <button type="submit">🗑️</button>
+    </form>
   )
 }
 

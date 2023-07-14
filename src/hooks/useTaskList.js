@@ -4,10 +4,12 @@ const getTask = () => {
   let tasks_obj = localStorage.getItem("tasks")
   if(!tasks_obj){
     tasks_obj = [{
+      name: "Bienvenido",
       desc: "No hay tareas previas, puede eliminar estas tareas",
       state: false,
       id: 0
     }, {
+      name: "Tarea 1",
       desc: "Luisa cortes",
       state: true,
       id: 1
@@ -21,20 +23,22 @@ const getTask = () => {
 export const useTaskList = () => {
   const [tasks, setTasks] = useState([])
   useEffect(() => setTasks(getTask()), [])
-  const addTask = input => {
+  useEffect(() => localStorage.setItem("tasks", JSON.stringify(tasks)), [tasks])
+  const addTask = data => {
     let id = Math.max.apply(null, [0, ...tasks.map(element => element.id)])+1
     setTasks([...tasks, {
-      desc: input,
+      name: data.name,
+      desc: data.desc,
       state: false,
       id: id
     }])
   }
   const deleteTask = id => setTasks(tasks.filter(element => element.id !== id))
-  const updateTask = (id, desc, state) => setTasks(tasks.map(element => element.id !== id ? element : {
+  const updateTask = (id, name, desc, state) => setTasks(tasks.map(element => element.id !== id ? element : {
+    name: name,
     desc: desc,
     state: state,
     id: id
   }))
-  useEffect(() => localStorage.setItem("tasks", JSON.stringify(tasks)), [tasks])
   return [tasks, addTask, deleteTask, updateTask]
 }

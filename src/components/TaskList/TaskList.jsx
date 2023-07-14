@@ -1,34 +1,52 @@
 import "./TaskList.css"
 import Task from "../Task/Task"
-import { useState } from "react"
-import { useTaskList } from "../../hooks/useTaskList"
+import {useTaskList} from "../../hooks/useTaskList"
+import {useForm} from "react-hook-form"
 
 const TaskList = () => {
-  const [input, setInput] = useState("")
-  const handleInput = item => setInput(item.target.value)
+
   const [tasks, addTask, deleteTask, editTask] = useTaskList()
+
+  const {
+    register,
+    handleSubmit,
+    formState: {errors}
+  } = useForm()
+
+  const handleAdd = data => addTask(data)
+
+
   let components = []
   for(let i = 0; i < tasks.length; i++) components.push(
     <Task 
       key={tasks[i].id} 
       id={tasks[i].id} 
+      name={tasks[i].name}
       desc={tasks[i].desc} 
       state={tasks[i].state} 
       onDelete={deleteTask}
       onEdit={editTask}
   />)
-  const handleAdd = event => {
-    event.preventDefault()
-    addTask(input)
-    setInput("")
-  }
-  console.log(tasks)
   return(
     <div id="TaskList">
-      <form id="InputContainer" onSubmit={handleAdd}>
-        <input type="text" placeholder="Nombre de la tarea" value={input} onChange={handleInput} required minLength={3}/>
+
+      <form id="InputContainer" onSubmit={handleSubmit(handleAdd)}>
+        <h2>{errors.name?.message}</h2>
+        <input type="text" placeholder="Nombre"
+          {...register("name", {
+            required: "Nombre requerido",
+            minLength: {
+              value: 3,
+              message: "Nombre mínimo 3 caracteres"
+            }
+          })}
+        />
+        <input type="text" placeholder="Descripción"
+          {...register("desc")}
+        />
         <button type="submit">+</button>
       </form>
+
       <div id="TaskContainer">
         {components}
       </div>

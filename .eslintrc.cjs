@@ -12,5 +12,7 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     "react/prop-types": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-undef": "off",
   },
 }

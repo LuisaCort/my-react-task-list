@@ -1,48 +1,54 @@
 #TaskList {
   height: 90vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow: hidden;
 }
 
 #InputContainer {
-  height: 5%;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  border-right: 2px solid #ccc;
+}
+
+#InputContainer>h2 {
+  color: red;
+  font-size: 20px;
 }
 
 #InputContainer>input[type="text"] {
+  margin: 10px;
   padding: 10px;
   border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #fff;
   color: #333;
   font-size: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #InputContainer>input[type="text"]:focus {
   outline: none;
   border-color: #6c63ff;
-  box-shadow: 0 2px 4px rgba(108, 99, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(108, 99, 255, 0.4);
 }
 
 #InputContainer>button {
-  padding: 10px 13px;
-  margin-left: 15px;
+  margin: 10px;
+  width: 215px;
+  height: 45px;
   border: none;
-  border-radius: 20%;
   background-color: #6c63ff;
   color: #fff;
-  font-size: 18px;
+  font-size: 40px;
   cursor: pointer;
   transition: all 0.3s;
-
+  border-radius: 10px;
 }
 
 #InputContainer>button:hover {
   background-color: #00cc00;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 #TaskContainer {
@@ -50,9 +56,7 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 100px;
-  width: 700px;
-  height: 95%;
+  padding: 0 50px;
   margin-top: 10px;
   overflow: scroll;
   overflow-y: auto;
