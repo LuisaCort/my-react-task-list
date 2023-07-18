@@ -2,7 +2,7 @@ import "./Task.css"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 
-const Task = (props) => {
+const Task = props => {
   const {id, onDelete, onEdit} = props
   const {
     register,
@@ -19,8 +19,8 @@ const Task = (props) => {
       }
     }
   )
-  const name = watch("name")
-  const desc = watch("desc")
+  const name = watch("name") ?? props.name
+  const desc = watch("desc") ?? props.desc
   const state = watch("state")
   useEffect(() => {
     (async () => {

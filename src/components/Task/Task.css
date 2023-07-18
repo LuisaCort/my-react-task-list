@@ -47,7 +47,7 @@
 }
 
 #Task:has(h2){
-  background-color: red !important;
+  background-color: rgba(170, 3, 3, 0.863) !important;
 }
 
 #text_fields{
@@ -69,6 +69,8 @@
   transition: all 0.3s;
   height: 30px;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
 }
 
 #text_fields>textarea{
@@ -78,6 +80,8 @@
   max-height: 30px;
   min-height: 30px;
   height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
 }
 
 #text_fields>textarea:focus{

@@ -10,10 +10,14 @@ const TaskList = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: {errors}
   } = useForm()
 
-  const handleAdd = data => addTask(data)
+  const handleAdd = data => {
+    addTask(data)
+    reset()
+  }
 
 
   let components = []
