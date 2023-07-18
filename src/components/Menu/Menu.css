@@ -1,0 +1,19 @@
+nav{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+nav a{
+  width: 100px;
+  height: 100%;
+  border-right: 2px solid black; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+}
