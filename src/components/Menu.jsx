@@ -1,5 +1,13 @@
 import { Link } from 'react-router-dom'
-import { ButtonGroup, Button } from '@chakra-ui/react'
+import { 
+  ButtonGroup, 
+  Button, 
+  IconButton, 
+  HStack, 
+  Spacer,
+  useColorMode
+} from '@chakra-ui/react'
+import { SunIcon } from '@chakra-ui/icons'
 
 function CustomButton(props) {
   return(
@@ -16,8 +24,10 @@ function CustomButton(props) {
 }
 
 export default function Menu() {
+  const { toggleColorMode } = useColorMode()
   return(
     <ButtonGroup 
+      as={HStack}
       borderBottom="2px"
       borderColor="gray.300"
       w="100vw"
@@ -27,6 +37,12 @@ export default function Menu() {
       <CustomButton to="/">Home</CustomButton>
       <CustomButton to="/tasks">Tareas</CustomButton>
       <CustomButton to="/about">Sobre Nosotros</CustomButton>
+      <Spacer/>
+      <IconButton
+        icon={<SunIcon/>}
+        variant="ghost"
+        onClick={toggleColorMode}
+      />
     </ButtonGroup>
   )
 }

@@ -9,12 +9,16 @@ import {
   EditableInput,
   EditablePreview,
   Textarea,
-  IconButton
+  IconButton,
+  useColorModeValue
 } from "@chakra-ui/react"
 import { DeleteIcon } from "@chakra-ui/icons"
 
 const Task = props => {
   const {id, onDelete, onEdit} = props
+  const color_bg = useColorModeValue("gray.100", "gray.700")
+  const complete_bg = useColorModeValue("green.100", "green.700")
+  const edit_bg = useColorModeValue("yellow.100", "yellow.500") 
   const {
     register,
     handleSubmit,
@@ -52,19 +56,22 @@ const Task = props => {
       width="500px"
       minHeight="180px"
       h="180px"
-      backgroundColor="gray.100"
       m="20px"
       rounded="20px"
-      bg={any_error?"red.100":state?"green.100":focused?"yellow.100":"gray.100"}
+      bg={any_error?"red.100":state?complete_bg:focused?edit_bg:color_bg}
+      _hover={{transform: "scale(1.1)"}}
     >
-      <Switch {...register("state")}/>
+      <Switch 
+        {...register("state")}
+        size="lg"
+      />
       <VStack w="300px">
         <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
         <Editable 
           placeholder="" 
           defaultValue={name} 
           isDisabled={state}
-          bg={state ? "green.100" : "white"}
+          bg={state ? complete_bg : "white"}
           textAlign="center"
           rounded="10px"
           w="100%"
@@ -73,6 +80,7 @@ const Task = props => {
         >
           <EditablePreview w="100%" h="24px" 
             textDecoration={state ? "line-through" : "none"}
+            color="black"
           />
           <EditableInput
             {...register("name", {
@@ -82,6 +90,7 @@ const Task = props => {
                 message: "Nombre mínimo 3 caracteres"
               }
             })}
+            color="black"
           />
         </Editable>
         <Textarea 
@@ -89,12 +98,16 @@ const Task = props => {
           bg={state ? "gray.100" : "white"}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}     
-          textDecoration={state ? "line-through" : "none"}     
+          textDecoration={state ? "line-through" : "none"}   
+          color={["black", "black"]}  
         />
       </VStack>
       <IconButton 
-        type="submit" icon={<DeleteIcon/>} colorScheme="red"
+        type="submit" icon={<DeleteIcon/>} 
+        bg="red"
+        color="white"
         size="lg"
+        _hover={{bg: "red.300"}}
       />
     </FormControl>
   )

@@ -9,19 +9,21 @@ import {
   FormHelperText,
   Input,
   IconButton,
-  Flex
+  Flex,
+  useColorModeValue
 } from "@chakra-ui/react"
 import { AddIcon } from "@chakra-ui/icons"
 
 import Task from "./Task"
 
 function TaskContainer(props){
+  const cards_bg = useColorModeValue("gray.100", "gray.700")
   return(
     <VStack
       p="10px"
       m="10px"
-      borderRadius="20px"
-      bg="gray.100"
+      borderRadius="10px"
+      bg={cards_bg}
     >
       {props.children}
     </VStack>
@@ -64,25 +66,29 @@ const TaskList = () => {
       >
         <TaskContainer>
           <FormLabel>Nombre</FormLabel>
-            <Input 
-              {...register("name", {
-                required: "Nombre requerido",
-                minLength: {
-                  value: 3,
-                  message: "Nombre mínimo 3 caracteres"
-                }
-              })}        
-              placeholder="Nombre"
-              bg="white"
-            />
-            <FormHelperText>Nombre de la tarea</FormHelperText>
+          <Input 
+            {...register("name", {
+              required: "Nombre requerido",
+              minLength: {
+                value: 3,
+                message: "Nombre mínimo 3 caracteres"
+              }
+            })}        
+            placeholder="Nombre"
+            bg="white"
+            color="black"
+            _placeholder={{color: "grey"}}
+          />
+          <FormHelperText>Nombre de la tarea</FormHelperText>
         </TaskContainer>
         <TaskContainer>
           <FormLabel>Descripción</FormLabel>
           <Input 
             {...register("desc")}
             placeholder="Descripción"
+            color="bg"
             bg="white"
+            _placeholder={{color: "grey"}}
           />
           <FormHelperText>Descripción de la tarea</FormHelperText>
         </TaskContainer>
@@ -93,7 +99,7 @@ const TaskList = () => {
         />
         <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
       </FormControl>
-      <Flex h="90vh" w="70vw" align="start" 
+      <Flex h="90vh" w="100%" align="start" 
         overflowY="scroll"
         flexDirection="column"
         justifyContent="flex-start"

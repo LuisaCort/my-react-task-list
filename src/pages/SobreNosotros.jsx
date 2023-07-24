@@ -10,7 +10,7 @@ export default function SobreNosotros() {
       se pueden editar y eliminar. Ademas, se pueden marcar como completadas
       y se almacenan en el dispositivo desde donde se accede a la aplicacion.
       Por lo que las notas se mantienen aun despues de cerrar la pagina.
-      <br />
+      <br /><br />
       Se usa Vite y CSS puro para el empaquetamiento y la apariencia
       de la aplicacion respectivamente.
     </Text>
